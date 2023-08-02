@@ -5,3 +5,12 @@ repos:
       - id: trailing-whitespace
       - id: check-yaml
       - id: check-added-large-files
+
+# Custom hook to check for a valid email format
+  - repo: local
+    hooks:
+      - id: validate-email-format
+        name: Validate Email Format
+        entry: python -c "import re, sys; email = sys.argv[1]; sys.exit(0) if re.match(r'^[\w\.-]+@[\w\.-]+\.[a-z]{2,}$', email) else sys.exit(1)"
+        language: system
+        args: ['upama@fusemachines.com']
