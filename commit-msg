@@ -2,8 +2,8 @@
 
 set commit_message_file=%1
 
-rem Check if the commit message contains tags like "fix", "refactor", etc.
-findstr /I /R "^(feat^|fix^|refactor^|chore^|docs^|style^|test^)(\(.\+\))?!?:" "%commit_message_file%" > nul
+rem Check if the commit message contains tags like "feat", "fix", "refactor", etc.
+findstr /I /R "^(fix^|refactor^|chore^|docs^|style^|test^)(\(.\+\))?!?:" "%commit_message_file%" > nul
 if %errorlevel% == 0 (
     exit 0  rem Commit message contains valid tags
 ) else (
