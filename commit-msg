@@ -8,4 +8,4 @@ if grep -iqE '^(feat|fix|refactor|chore|docs|style|test)(\(.+\))?!?:' "$commit_m
 else
   echo "Error: Commit message must start with a valid type tag (feat, fix, refactor, etc.)"
   exit 1  # Exit with non-zero status to reject the commit
-f1
+fi
