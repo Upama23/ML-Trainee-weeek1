@@ -2,4 +2,5 @@
 
 NOTES TO THE MATERIALS STUDIED
 
+DAY1 
 https://honeysuckle-violet-f54.notion.site/IDEs-and-Plugins-2ea9881e99bb4947bba63019ee2d376d?pvs=4
