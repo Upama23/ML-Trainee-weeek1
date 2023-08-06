@@ -1,0 +1,20 @@
+[
+    {
+        "student_id": "064",
+        "name": "Sadichhya",
+        "age": 23,
+        "grade": "A"
+    },
+    {
+        "student_id": "094",
+        "name": "Upama",
+        "age": 23,
+        "grade": "B"
+    },
+    {
+        "student_id": "097",
+        "name": "Samyam",
+        "age": 22,
+        "grade": "C"
+    }
+]
