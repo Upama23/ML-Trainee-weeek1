@@ -6,11 +6,16 @@
 # polymorphism by defining a common method for both the University and
 # Department classes to display their details.
 
+"""
+This module contains examples of oop in Python.
+"""
+
 class University:
     def __init__(self,name, location, departments):
-          self.name = name
-          self.location = location
-          self.departments = departments
+        self.name = name
+        self.location = location
+        self.departments = departments
+
     def get_name(self):
         return self._name
 
@@ -25,8 +30,9 @@ class University:
         print("Location:",self.location)
         print("List of departments",self.departments)
 
+
 class Department(University):
-    def __init__(self, university_name, university_location, departments,department_name, head_of_the_department, courses_offered):
+    def __init__(self, university_name, university_location, departments, department_name, head_of_the_department, courses_offered):
         super().__init__(university_name, university_location, departments)
 
         self.department_name = department_name
@@ -43,10 +49,10 @@ class Department(University):
         return self._courses_offered
 
     def display(self):
-         super().display()
-         print("Department Name:",self.department_name)
-         print("HOD:",self.head_of_the_department)
-         print("List of courses:",self.courses_offered)
+        super().display()
+        print("Department Name:",self.department_name)
+        print("HOD:",self.head_of_the_department)
+        print("List of courses:",self.courses_offered)
 
 
 U1 = University("Tribhuwan", "Kathmandu",["BCT","CIVIL","BEX"])
@@ -86,14 +92,7 @@ class Customer:
 
 
 if __name__ == "__main__":
-
     customer1 = Customer("John Doe", 30, "123 Main Street, City")
-
-
     customer1.create_account("123456789", 1000, "Savings")
-
-
     print(f"{customer1.name} has a {customer1.bank_account.account_type} account with account number {customer1.bank_account.account_number} and balance {customer1.bank_account.balance}.")
-
-
     del customer1
