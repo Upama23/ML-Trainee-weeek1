@@ -3,33 +3,44 @@
 # ConsoleLogger, DatabaseLogger). Implement methods in each logger to write logs to
 # their respective destinations. Show how the Factory Design Pattern helps to decouple
 # the logging system from the application and allows for flexible log handling.
-
+"""
+This module contains examples of design patterns in Python.
+"""
 
 import logging
 import datetime
+import json
+import os
 
+# Factory Design Pattern
 class FileLogger:
+    """File Logger"""
     def __init__(self) -> None:
         print("File Logging")
 
     def logging(self, msg):
+        """Logging"""
         return logging.info(f"File Logging {msg} at {datetime.datetime.now()}")
 
 class ConsoleLogger:
+    """Console Logger"""
     def __init__(self) -> None:
         print("Console Logging")
 
     def logging(self, msg):
+        """Logging"""
         return logging.warning(f"Console Logging {msg} at {datetime.datetime.now()}")
 
 class DatabaseLogger:
+    """Database Logger"""
     def __init__(self) -> None:
         print("Database Logging")
 
     def logging(self, msg):
+        """Logging"""
         return logging.info(f"Database Logging {msg} at {datetime.datetime.now()}")
 
-def FactoryLogger(logger_type: str):
+def factory_logger(logger_type: str):
     """Factory Method"""
 
     loggers = {
@@ -42,14 +53,14 @@ def FactoryLogger(logger_type: str):
 
 logging.basicConfig(level=logging.INFO)
 
-message = "secret"
-file = FactoryLogger("File")
-console_abc = FactoryLogger("Console")
-database = FactoryLogger("Database")
+MESSAGE = "secret"
+file = factory_logger("File")
+console_abc = factory_logger("Console")
+database = factory_logger("Database")
 
-file.logging(message)
-console_abc.logging(message)
-database.logging(message)
+file.logging(MESSAGE)
+console_abc.logging(MESSAGE)
+database.logging(MESSAGE)
 
 # [Builder Design Pattern] Design a document generator using the Builder Design
 # Pattern. Create a DocumentBuilder that creates documents of various types (e.g., PDF,
@@ -59,59 +70,74 @@ database.logging(message)
 # document generation logic.
 
 class PDFDocument:
-
+    """Pdf Documents."""
     def __init__(self) -> None:
         self.content = ""
 
     def add_heading(self, heading):
+        """Add heading"""
         self.content += f"<h1>{heading}</h1>\n"
 
     def add_paragraph(self, paragraph):
+        """Add paragraph"""
         self.content += f"<p>{paragraph}</p>\n"
 
     def __str__(self):
         return f"PDF Document:\n{self.content}"
 
 class HTMLDocument:
+    """HTML documents."""
     def __init__(self):
         self.content = ""
 
     def add_heading(self, heading):
+        """Adding the heading"""
         self.content += f"<h1>{heading}</h1>\n"
 
     def add_paragraph(self, paragraph):
+        """
+        Adding the paragraph
+        """
         self.content += f"<p>{paragraph}</p>\n"
 
     def __str__(self):
         return f"HTML Document:\n{self.content}"
 
 class PlainTextDocument:
+    """
+        Plain Text.
+    """
     def __init__(self):
-
         self.content = ""
 
     def add_heading(self, heading):
+        """Adding the heading"""
         self.content += f"<h>{heading}</h>"
 
     def add_paragraph(self, paragraph):
+        """Adding the paragraph"""
         self.content += f"<p>{paragraph}</p>"
 
     def __str__(self):
         return f"Plain Text Document:\n {self.content}"
 
 class DocumentBuilder:
-
+    """
+        Document Builder.
+    """
     def add_heading(self, heading):
-        pass
+        """Addng the heading"""
 
     def add_paragraph(self, paragraph):
-        pass
+        """Adding the paragraph"""
 
     def get_document(self):
-        pass
+        """Get the document"""
 
 class PDFDocumentBuilder(DocumentBuilder):
-
+    """
+        PDF Document.
+    """
     def __init__(self):
         self.document = PDFDocument()
 
@@ -126,7 +152,9 @@ class PDFDocumentBuilder(DocumentBuilder):
 
 
 class HTMLDocumentBuilder(DocumentBuilder):
-
+    """
+        Html Document.
+    """
     def __init__(self):
         self.document = HTMLDocument()
 
@@ -140,7 +168,9 @@ class HTMLDocumentBuilder(DocumentBuilder):
         return self.document
 
 class PlainTextDocumentBuilder(DocumentBuilder):
-
+    """
+        Plain text Document.
+    """
     def __init__(self):
         self.document = PlainTextDocument()
 
@@ -154,11 +184,14 @@ class PlainTextDocumentBuilder(DocumentBuilder):
         return self.document
 
 class DocumentGenerator:
-
+    """
+        Document Generator
+    """
     def __init__(self, builder):
         self.builder = builder
 
     def generate_document(self):
+        """Genrate the documents """
         self.builder.add_heading("Sample Document")
         self.builder.add_paragraph("This is the paragraph in the document.")
         self.builder.add_heading("Another Heading")
@@ -167,7 +200,9 @@ class DocumentGenerator:
         return self.builder.get_document()
 
 def main():
-
+    """
+        Main Function
+    """
     pdf_builder = PDFDocumentBuilder()
     pdf_generator = DocumentGenerator(pdf_builder)
     pdf_document = pdf_generator.generate_document()
@@ -196,38 +231,42 @@ if __name__ == "__main__":
 # the Singleton Design Pattern ensures that there is only one instance of the
 # configuration manager, preventing unnecessary multiple reads of the configuration file.
 
-import json
-import os
 
 class ConfigurationManager:
+    """Config Manager"""
     __instance = None
     __config_data = None
 
     def __new__(cls):
-
+        """
+            New class
+        """
         input_file = "config.json"
         script_dir = os.path.dirname(os.path.abspath(__file__))
         input_file = os.path.join(script_dir, input_file)
         if cls.__instance is None:
             cls.__instance = super(ConfigurationManager,cls).__new__(cls)
-            with open(input_file, 'r') as config_file:
+            with open(input_file, 'r', encoding='utf-8') as config_file:
                 cls.__config_data = json.load(config_file)
         return cls.__instance
 
     def get_setting(self, section, setting_name):
-
+        """Get Setting."""
         return self.__config_data.get(section, {}).get(setting_name)
 
     def set_setting(self, section, setting_name, value):
+        """
+            Set Setting.
+        """
         input_file = "config.json"
         script_dir = os.path.dirname(os.path.abspath(__file__))
         input_file = os.path.join(script_dir, input_file)
+
         if section not in self.__config_data:
             self.__config_data[section] = {}
             self.__config_data[section][setting_name] = value
-            with open(input_file, 'w') as config_file:
+            with open(input_file, 'w', encoding='utf-8') as config_file:
                 json.dump(self.__config_data, config_file, ident=4)
-
 
 if __name__ == '__main__':
     config_manager1 = ConfigurationManager()
@@ -238,9 +277,7 @@ if __name__ == '__main__':
     setting1_value = config_manager1.get_setting('AppConfig', 'setting1')
     print(setting1_value)
 
-
     config_manager1.set_setting('AppConfig', 'setting1', 'new_value')
-
 
     setting1_updated_value = config_manager2.get_setting('AppConfig', 'setting1')
     print(setting1_updated_value)
